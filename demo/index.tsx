@@ -4,6 +4,8 @@ import { createRoot } from 'react-dom/client';
 
 import App from './app';
 
+// TODO add proper deps to package.json for typescript
+
 const rootElement = document.getElementById('root')!;
 const root = createRoot(rootElement);
 
