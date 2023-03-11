@@ -1,0 +1,28 @@
+{
+  "extends": ["config:base"],
+  "labels": ["dependencies"],
+  "prHourlyLimit": 0,
+  "prCreation": "not-pending",
+  "prConcurrentLimit": 0,
+  "stabilityDays": 7,
+  "vulnerabilityAlerts": true,
+  "rangeStrategy": "bump",
+  "packageRules": [
+    {
+      "matchDepTypes": ["engines"],
+      "enabled": false
+    },
+    {
+      "matchPackageNames": ["dynamic-marquee"],
+      "stabilityDays": 0
+    },
+    {
+      "matchPackageNames": ["regjsparser"],
+      "rangeStrategy": "pin"
+    },
+    {
+      "matchDepTypes": ["devDependencies"],
+      "rangeStrategy": "pin"
+    }
+  ]
+}

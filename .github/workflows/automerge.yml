@@ -2,7 +2,10 @@ name: Auto Merge Dependency Updates
 
 on:
   - pull_request_target
-  - pull_request_review
+
+permissions:
+  contents: write
+  pull-requests: write
 
 jobs:
   run:
@@ -10,5 +13,5 @@ jobs:
     steps:
       - uses: tjenkinson/gh-action-auto-merge-dependency-updates@v1
         with:
-          # TODO setup renovate
-          allowed-actors: dependabot-preview[bot], dependabot[bot], tjenkinson
+        # TODO enable
+        # allowed-actors: renovate[bot]
