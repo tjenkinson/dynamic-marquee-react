@@ -9,67 +9,15 @@ import React, {
   useState,
 } from 'react';
 import { createPortal } from 'react-dom';
+import { createContainer } from './create-container';
+import { IdGenerator } from './id-generator';
+import { WatchSize } from './watch-size';
 
 export type MarqueeOpts = {
   rate?: number;
   upDown?: boolean;
   startOnScreen?: boolean;
 };
-
-function createContainer() {
-  const $el = document.createElement('div');
-  $el.style.all = 'unset';
-  $el.style.display = 'block';
-  return $el;
-}
-
-function IdGenerator() {
-  const ids = new Set();
-  return {
-    generate() {
-      const base = `${performance.now()}`;
-      let id = base;
-      for (let i = 0; ids.has(id); i++) {
-        id = `${base}:${i}`;
-      }
-      ids.add(id);
-      return id;
-    },
-    release(id: string) {
-      ids.delete(id);
-    },
-  };
-}
-
-function WatchSize({
-  marqueeInstance,
-  onChange,
-  children,
-}: PropsWithChildren<{
-  marqueeInstance: MarqueeLib;
-  onChange: (size: number) => void;
-}>) {
-  const [$container] = useState(createContainer());
-  const currentOnChange = useRef(onChange);
-  currentOnChange.current = onChange;
-
-  useLayoutEffect(() => {
-    if (!$container) return;
-
-    const { getSize, onSizeChange, stopWatching } =
-      marqueeInstance.watchItemSize($container);
-
-    const send = () => currentOnChange.current(getSize());
-
-    onSizeChange(() => send());
-
-    send();
-
-    return () => stopWatching();
-  }, [$container, marqueeInstance]);
-
-  return createPortal(children, $container);
-}
 
 export function Marquee({
   children,
