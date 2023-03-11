@@ -58,8 +58,11 @@ function WatchSize({
   useLayoutEffect(() => {
     if (!$container) return;
 
-    const { getSize, onSizeChange, stopWatching } =
-      marqueeInstance.watchItemSize($container);
+    const {
+      getSize,
+      onSizeChange,
+      stopWatching,
+    } = marqueeInstance.watchItemSize($container);
 
     const send = () => currentOnChange.current(getSize());
 
