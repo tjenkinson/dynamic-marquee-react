@@ -14,8 +14,11 @@ import { IdGenerator } from './id-generator';
 import { WatchSize } from './watch-size';
 
 export type MarqueeOpts = {
+  // TODO doc
   rate?: number;
+  // TODO doc
   upDown?: boolean;
+  // TODO doc
   startOnScreen?: boolean;
 };
 
