@@ -10,8 +10,6 @@ import React, {
 } from 'react';
 import { createPortal } from 'react-dom';
 
-// TODO update doc comments
-
 export type MarqueeOpts = {
   rate?: number;
   upDown?: boolean;
@@ -78,9 +76,8 @@ export function Marquee({
   ...marqueeOpts
 }: PropsWithChildren<MarqueeOpts>) {
   const filteredChildren = Children.toArray(children);
-  if (filteredChildren.length === 0) {
-    return <div />;
-  }
+  if (filteredChildren.length === 0) return <div />;
+
   return (
     <MarqueeInternal {...marqueeOpts} filteredChildren={filteredChildren} />
   );
@@ -94,7 +91,6 @@ type Placeholder = {
   appended: boolean;
 };
 
-// TODO take opts individually and make sure upDown works
 const MarqueeInternal = React.memo(
   ({
     filteredChildren,
@@ -119,6 +115,8 @@ const MarqueeInternal = React.memo(
     childrenCount.current = filteredChildren.length;
 
     useLayoutEffect(() => {
+      // Input items have changed. If there are frewer than before trim the item
+      // sizes array.
       if (itemSizes.current.length > filteredChildren.length) {
         itemSizes.current = itemSizes.current.slice(0, filteredChildren.length);
       }
@@ -127,7 +125,7 @@ const MarqueeInternal = React.memo(
     useEffect(() => {
       if (!$container) return;
 
-      // (1) create the marquee instance
+      // Create the marquee instance.
       const marquee = new MarqueeLib($container, {
         upDown: upDownInitial,
         startOnScreen: startOnScreenInitial,
@@ -148,6 +146,8 @@ const MarqueeInternal = React.memo(
       if (!marqueeInstance) return;
 
       const createPlaceholders = (sizeToFill: number) => {
+        // we may have some placeholders queued, and if that's the case
+        // subtract their sizes.
         placeholders.current
           .filter(({ appended }) => !appended)
           .forEach(
@@ -155,12 +155,13 @@ const MarqueeInternal = React.memo(
           );
 
         let zeroIncreaseCounter = 0;
+        // Figure out how many items we need to fill the available space, and create
+        // that many placeholders. The next render will put the placeholders in the dom.
         while (
           sizeToFill > 0 &&
-          // if all sizes end up being 0 prevent an infinite loop
+          // If all sizes end up being 0 prevent an infinite loop.
           zeroIncreaseCounter < itemSizes.current.length
         ) {
-          // (3) create a placeholder but don't put it in the dom yet
           const childIndex = nextChildIndex.current;
           const childSize = itemSizes.current[childIndex];
           if (childSize === 0) {
@@ -184,17 +185,17 @@ const MarqueeInternal = React.memo(
             (nextChildIndex.current + 1) % childrenCount.current;
         }
 
+        // Trigger a render.
         setRenderTrigger({});
       };
 
       marqueeInstance.onItemRequired(({ touching }) => {
-        // todo can to fill actually be 0?
-        // (6) there is space for a new item, so create the placeholder for it
         nextItemTouching.current = !!touching;
         createPlaceholders(marqueeInstance.getGapSize());
       });
 
       marqueeInstance.onItemRemoved(($el) => {
+        // Remove the placeholder for the item that has just been removed from the marquee.
         placeholders.current = placeholders.current.filter(
           ({ $placeholder, key }) => {
             if ($el === $placeholder) {
@@ -206,35 +207,39 @@ const MarqueeInternal = React.memo(
         );
       });
 
-      // (2) create the first placeholder for the first item
+      // Create the placeholder for the first item.
+      // May actually be more than one item if the items are smaller than the buffer size.
       createPlaceholders(marqueeInstance.getGapSize());
     }, [idGenerator, marqueeInstance]);
 
     useEffect(() => {
       if (!marqueeInstance || rate === undefined) return;
+      // The rate has changed, update it.
       marqueeInstance.setRate(rate);
     }, [marqueeInstance, rate]);
 
     useEffect(() => {
       if (!marqueeInstance) return;
 
+      // We have just rendered, and the marquee is waiting for the next item.
+      // This is in a loop because there may be room for more than one item.
       while (marqueeInstance.isWaitingForItem()) {
         const toAppend = placeholders.current.find(
           ({ inDom, appended }) => inDom && !appended
         );
         if (!toAppend) {
-          // TODO comment that we misjudged size or initial render
+          // Ran out of placeholders that are in the DOM. More should have been
+          // created but are not in the dom yet until the next render.
+          // This may happen if the container or item sizes changed between when
+          // we calculated how many new placeholders we needed and now.
           return;
         }
 
-        // TODO comment on mutation
         toAppend.appended = true;
 
-        // (5) at this point we should have rendered and the element will be
-        // in the dom in the portal with content in, so append it to the marquee
-        console.log('append placeholder');
+        // Note that this may synchronously call the `onItemRequired` callback,
+        // which may result in more placeholders being created if needed.
         marqueeInstance.appendItem(toAppend.$placeholder, {
-          // TODO not that onItemRequired may be called here and update this ref
           snapToNeighbour: nextItemTouching.current,
         });
       }
@@ -246,7 +251,7 @@ const MarqueeInternal = React.memo(
           ref={setContainer}
           style={{ all: 'unset', display: 'block', height: '100%' }}
         />
-        {/* (4) create the portal, putting the new placeholders in the dom (if there are any) */}
+        {/* Create the portals, putting the new placeholders in the dom (if there are any) */}
         {placeholders.current.map((placeholder) => {
           const { $placeholder, key, childIndex } = placeholder;
           placeholder.inDom = true;
