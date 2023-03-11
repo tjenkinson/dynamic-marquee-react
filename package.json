@@ -1,0 +1,60 @@
+{
+  "name": "dynamic-marquee-react",
+  "version": "0.0.0",
+  "description": "TODO",
+  "main": "./dist/dynamic-marquee-react.js",
+  "module": "./dist/dynamic-marquee-react.mjs",
+  "types": "TODO",
+  "scripts": {
+    "build": "rollup --config rollup.config.mjs",
+    "watch": "rollup --config rollup.config.mjs --watch",
+    "prettier": "prettier --write .",
+    "lint": "eslint --ext ts,tsx src && prettier --check .",
+    "preversion": "npm run build",
+    "prepare": "husky install"
+  },
+  "files": [
+    "dist/**/*"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tjenkinson/dynamic-marquee-react.git"
+  },
+  "keywords": [
+    "marquee",
+    "react",
+    "js",
+    "javascript",
+    "graphics",
+    "casparcg"
+  ],
+  "author": "Tom Jenkinson <tjcode@outlook.com>",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/tjenkinson/dynamic-marquee-react/issues"
+  },
+  "homepage": "https://github.com/tjenkinson/dynamic-marquee-react#readme",
+  "peerDependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@rollup/plugin-node-resolve": "^15.0.1",
+    "@rollup/plugin-typescript": "^11.0.0",
+    "@types/react": "^18.0.28",
+    "@types/react-dom": "^18.0.11",
+    "@typescript-eslint/eslint-plugin": "^5.54.1",
+    "@typescript-eslint/parser": "^5.54.1",
+    "dynamic-marquee": "2.6.0",
+    "eslint": "^8.36.0",
+    "eslint-plugin-react": "^7.32.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "husky": "^8.0.3",
+    "prettier": "^2.0.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "rollup": "^3.18.0",
+    "tslib": "^2.5.0",
+    "typescript": "^4.9.5"
+  }
+}
