@@ -17,10 +17,6 @@
       "stabilityDays": 0
     },
     {
-      "matchPackageNames": ["regjsparser"],
-      "rangeStrategy": "pin"
-    },
-    {
       "matchDepTypes": ["devDependencies"],
       "rangeStrategy": "pin"
     }

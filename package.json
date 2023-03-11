@@ -4,7 +4,7 @@
   "description": "TODO",
   "main": "./dist/dynamic-marquee-react.js",
   "module": "./dist/dynamic-marquee-react.mjs",
-  "types": "TODO",
+  "types": "./dist/marquee.d.ts",
   "scripts": {
     "build": "rollup --config rollup.config.mjs",
     "watch": "rollup --config rollup.config.mjs --watch",
