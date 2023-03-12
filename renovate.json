@@ -7,6 +7,7 @@
   "stabilityDays": 7,
   "vulnerabilityAlerts": true,
   "rangeStrategy": "bump",
+  "ignorePaths": ["/demo/**"],
   "packageRules": [
     {
       "matchDepTypes": ["engines"],
