@@ -4,7 +4,6 @@ import React, {
   Children,
   PropsWithChildren,
   useEffect,
-  useLayoutEffect,
   useRef,
   useState,
 } from 'react';
@@ -68,13 +67,11 @@ const MarqueeInternal = React.memo(
     const childrenCount = useRef(filteredChildren.length);
     childrenCount.current = filteredChildren.length;
 
-    useLayoutEffect(() => {
-      // Input items have changed. If there are frewer than before trim the item
-      // sizes array.
-      if (itemSizes.current.length > filteredChildren.length) {
-        itemSizes.current = itemSizes.current.slice(0, filteredChildren.length);
-      }
-    }, [filteredChildren.length]);
+    // Input items have changed. If there are fewer than before trim the item
+    // sizes array.
+    if (itemSizes.current.length > filteredChildren.length) {
+      itemSizes.current = itemSizes.current.slice(0, filteredChildren.length);
+    }
 
     useEffect(() => {
       if (!$container) return;
