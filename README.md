@@ -12,7 +12,7 @@ Features:
 
 # Demo
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/tjenkinson/dynamic-marquee-react/tree/main/demo?title=Dynamic%20Marquee%20React%20Demo&file=src%2Fmain.ts)
+[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/tjenkinson/dynamic-marquee-react/tree/main/demo?title=Dynamic%20Marquee%20React%20Demo&file=src%2Fmain.tsx)
 
 View the code in "[demo](./demo)".
 
