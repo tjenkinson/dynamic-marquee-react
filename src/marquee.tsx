@@ -60,7 +60,7 @@ const MarqueeInternal = React.memo(
     const placeholders = useRef<Placeholder[]>([]);
     const nextChildIndex = useRef(0);
     const [marqueeInstance, setMarqueeInstance] = useState<MarqueeLib | null>(
-      null
+      null,
     );
     const nextItemTouching = useRef(false);
     const itemSizes = useRef<number[]>([]);
@@ -102,7 +102,7 @@ const MarqueeInternal = React.memo(
         placeholders.current
           .filter(({ appended }) => !appended)
           .forEach(
-            ({ childIndex }) => (sizeToFill -= itemSizes.current[childIndex])
+            ({ childIndex }) => (sizeToFill -= itemSizes.current[childIndex]),
           );
 
         let zeroIncreaseCounter = 0;
@@ -154,7 +154,7 @@ const MarqueeInternal = React.memo(
               return false;
             }
             return true;
-          }
+          },
         );
       });
 
@@ -176,7 +176,7 @@ const MarqueeInternal = React.memo(
       // This is in a loop because there may be room for more than one item.
       while (marqueeInstance.isWaitingForItem()) {
         const toAppend = placeholders.current.find(
-          ({ inDom, appended }) => inDom && !appended
+          ({ inDom, appended }) => inDom && !appended,
         );
         if (!toAppend) {
           // Ran out of placeholders that are in the DOM. More should have been
@@ -225,7 +225,7 @@ const MarqueeInternal = React.memo(
           : null}
       </React.Fragment>
     );
-  }
+  },
 );
 
 MarqueeInternal.displayName = 'MarqueeInternal';

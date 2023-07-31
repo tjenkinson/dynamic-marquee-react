@@ -3,7 +3,7 @@ import typescript from '@rollup/plugin-typescript';
 import fs from 'fs';
 
 const packageJson = JSON.parse(
-  fs.readFileSync('./package.json', { encoding: 'utf-8' })
+  fs.readFileSync('./package.json', { encoding: 'utf-8' }),
 );
 
 export default {
