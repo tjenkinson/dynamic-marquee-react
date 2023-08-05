@@ -47,7 +47,7 @@
     "@typescript-eslint/parser": "6.2.0",
     "dynamic-marquee": "2.6.3",
     "eslint": "8.46.0",
-    "eslint-plugin-react": "7.33.0",
+    "eslint-plugin-react": "7.33.1",
     "eslint-plugin-react-hooks": "4.6.0",
     "husky": "8.0.3",
     "prettier": "3.0.0",
