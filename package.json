@@ -46,7 +46,7 @@
     "@typescript-eslint/eslint-plugin": "6.13.1",
     "@typescript-eslint/parser": "6.13.1",
     "dynamic-marquee": "2.6.3",
-    "eslint": "8.54.0",
+    "eslint": "8.55.0",
     "eslint-plugin-react": "7.33.2",
     "eslint-plugin-react-hooks": "4.6.0",
     "husky": "8.0.3",
