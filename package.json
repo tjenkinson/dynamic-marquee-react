@@ -1,6 +1,6 @@
 {
   "name": "dynamic-marquee-react",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A `<Marquee />` component for React.",
   "main": "./dist/dynamic-marquee-react.js",
   "module": "./dist/dynamic-marquee-react.mjs",
