@@ -13,6 +13,8 @@ Features:
 ## Demo
 
 [![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/tjenkinson/dynamic-marquee-react/tree/main/demo?title=Dynamic%20Marquee%20React%20Demo&file=src%2Fmain.tsx)
+[![Open in Codeanywhere](https://codeanywhere.com/img/open-in-codeanywhere-btn.svg)](https://app.codeanywhere.com/#https://github.com/tjenkinson/dynamic-marquee-react)
+
 
 or [view a deployed demo](https://dynamic-marquee-react.tjenkinson.dev/).
 
